@@ -20,7 +20,7 @@ def convert_trackers(list_info: list) -> str:
         for line in lines:
             if not line.startswith("#") and line.strip():
                 domain_list.append("|" + re.sub(r"^.*://(.*):\d.*", r"\1",line) + "^")
-    result = "\n".join(domain_list)
+    result = "\n".join(list(dict.fromkeys(domain_list)))
     filepath = os.path.join(output_dir, list_info[0] + ".txt")
     with open(filepath, "w") as f:
         f.write(result)
